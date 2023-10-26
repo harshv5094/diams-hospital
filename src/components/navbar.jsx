@@ -61,6 +61,8 @@ function NavBar() {
           mt={{ base: 4, md: 0 }}
         >
           <LinkItem path={`/`}>Home</LinkItem>
+          <LinkItem path={`/patients`}>Patients</LinkItem>
+          <LinkItem path={`/wards`}>Ward</LinkItem>
         </Stack>
 
         <Box flex={1} align="right">
@@ -74,6 +76,12 @@ function NavBar() {
               <MenuList>
                 <MenuItem as={MenuLink} to={'/'}>
                   Home
+                </MenuItem>
+                <MenuItem as={MenuLink} to={'/patients'}>
+                  Patients
+                </MenuItem>
+                <MenuItem as={MenuLink} to={'/wards'}>
+                  Wards
                 </MenuItem>
               </MenuList>
             </Menu>
