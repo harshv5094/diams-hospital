@@ -1,3 +1,4 @@
+import Main from "../components/main"
 
 function WardLists() {
   return (
