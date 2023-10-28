@@ -50,7 +50,8 @@ export const patientsReducer = createSlice({
     status: 'idle',
     error: null
   },
-  reducers: {
+  reducers: {},
+  extraReducers: {
     [fetchPatients.pending]: state => {
       state.status = 'loading'
     },
