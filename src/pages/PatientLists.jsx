@@ -16,6 +16,8 @@ import { useEffect } from 'react'
 import Main from '../components/main'
 import { fetchPatients } from '../features/patientsReducer'
 import Loading from '../components/loading-spinner'
+import { NavLink } from 'react-router-dom'
+import PatientModal from '../components/patients-modal'
 
 function PatientLists() {
   const dispatch = useDispatch()
@@ -25,45 +27,63 @@ function PatientLists() {
       dispatch(fetchPatients())
     }
   }, [status, dispatch])
+
   return (
     <Main>
-      {status === 'loading' && <Loading />}
-      {status === 'success' && (
-        <Box display={`flex`} flexDir={`column`} alignItems={`center`}>
-          <Container textAlign={`center`} fontSize={`2.24rem`} mt={10}>
-            Patient List
-          </Container>
+      <Box
+        mt={`3.6rem`}
+        display={`flex`}
+        flexDir={`column`}
+        justifyContent={`center`}
+        alignItems={`center`}
+      >
+        {status === 'loading' && <Loading />}
+        {status === 'success' && (
+          <Box>
+            <Container textAlign={`center`} fontSize={`2.24rem`}>
+              Patient List
+            </Container>
 
-          <TableContainer overflow={`auto`}>
-            <Table size={`lg`} variant={`striped`} colorScheme="teal">
-              <Thead>
-                <Tr>
-                  <Th>Name</Th>
-                  <Th isNumeric>Age</Th>
-                  <Th>Actions</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {patients.map((item, index) => (
-                  <Tr key={index}>
-                    <Td>{item.name}</Td>
-                    <Td isNumeric>{item.age}</Td>
-                    <Td>
-                      <Button colorScheme="yellow" variant={`ghost`}>
-                        View
-                      </Button>
-                      <Button colorScheme="red" variant={`ghost`}>
-                        Delete
-                      </Button>
-                    </Td>
+            <Box textAlign={`center`} mb={2}>
+              <PatientModal />
+            </Box>
+
+            <TableContainer overflow={`auto`}>
+              <Table size={`lg`} variant={`striped`} colorScheme="teal">
+                <Thead>
+                  <Tr>
+                    <Th>Name</Th>
+                    <Th isNumeric>Age</Th>
+                    <Th>Actions</Th>
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </TableContainer>
-        </Box>
-      )}
-      {status === 'error' && <Error message={error} />}
+                </Thead>
+                <Tbody>
+                  {patients.map((item, index) => (
+                    <Tr key={index}>
+                      <Td>{item.name}</Td>
+                      <Td isNumeric>{item.age}</Td>
+                      <Td>
+                        <Button
+                          as={NavLink}
+                          to={`/patients/${item._id}`}
+                          colorScheme="yellow"
+                          variant={`ghost`}
+                        >
+                          View
+                        </Button>
+                        <Button colorScheme="red" variant={`ghost`}>
+                          Delete
+                        </Button>
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          </Box>
+        )}
+        {status === 'error' && <Error message={error} />}
+      </Box>
     </Main>
   )
 }
