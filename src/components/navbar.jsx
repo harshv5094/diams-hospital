@@ -1,7 +1,18 @@
-import { Box, Container, Link, Menu, MenuButton, MenuItem, MenuList, Stack } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  IconButton,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Stack
+} from '@chakra-ui/react'
 import { forwardRef } from 'react'
 import { NavLink as ReactRouterLink } from 'react-router-dom'
 import ThemeToggleButton from './themeToggleButton'
+import { HamburgerIcon } from '@chakra-ui/icons'
 
 function NavBar() {
   const LinkItem = ({ path, children, ...props }) => {
@@ -41,12 +52,11 @@ function NavBar() {
       <Container
         display={`flex`}
         justify={`space-between`}
-        maxW={`container.md`}
+        maxW={`container.lg`}
         wrap={`wrap`}
         align={`center`}
         p={2}
       >
-
         <Box fontSize={`24px`} mr={5} fontWeight={700}>
           Diams Hospital
         </Box>
@@ -67,12 +77,13 @@ function NavBar() {
 
         <Box flex={1} align="right">
           <ThemeToggleButton />
-          <Box
-            ml={2}
-            display={{ base: "inline-block", md: 'none' }}
-          >
+          <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
             <Menu isLazy id="navbar-menu">
-              <MenuButton />
+              <MenuButton
+                as={IconButton}
+                icon={<HamburgerIcon />}
+                variant={`solid`}
+              />
               <MenuList>
                 <MenuItem as={MenuLink} to={'/'}>
                   Home
