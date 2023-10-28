@@ -4,6 +4,7 @@ import PageNotFound from './pages/404'
 import Home from './pages/Home'
 import PatientLists from './pages/PatientLists'
 import WardLists from './pages/WardLists'
+import PatientView from './pages/PatientView'
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/*" element={<PageNotFound />} />
         <Route path="/patients" element={<PatientLists />} />
-        <Route path='/wards' element={<WardLists />} />
+        <Route path="/patients/:patientID" element={<PatientView />} />
+        <Route path="/wards" element={<WardLists />} />
       </Routes>
     </>
   )
